@@ -15,7 +15,8 @@ extension PusherChannel {
     /// - Parameter name: The name of the channel.
     /// - Returns: A `Bool` indicating whether the channel is encrypted or not.
     static func isEncrypted(name: String?) -> Bool {
-        return name?.starts(with: "\(Constants.ChannelTypes.privateEncrypted)-") ?? false
+        guard let name else { return false }
+        return name.contains("-enc-") || name.starts(with: "\(Constants.ChannelTypes.privateEncrypted)-")
     }
 
     /// Determines if an event is a system event or not, based on its name.
